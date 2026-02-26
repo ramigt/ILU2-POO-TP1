@@ -8,6 +8,102 @@ public class Village {
 	private Chef chef;
 	private Gaulois[] villageois;
 	private int nbVillageois = 0;
+	
+	
+	public class Marche {
+		private Etal[] etals;
+		
+		
+		
+		public Marche(int nb_etals) {
+			etals = new Etal[nb_etals];
+			for (int i = 0; i < nb_etals; i++) {
+	            etals[i] = new Etal();
+			}
+		}
+	        	
+	    void utiliserEtal(int indiceEtal, Gaulois vendeur,
+				String produit, int nbProduit) {
+	    	 etals[indiceEtal].occuperEtal(vendeur, produit, nbProduit);
+	    }
+	    
+	    int trouverEtalLibre() {
+	    	for (int i = 0; i < etals.length ; i++) {
+	    		if(!etals[i].isEtalOccupe()) {
+	    			return i;
+	    			
+	    		}else {
+	    			return -1;
+	    		}
+	    		
+	    	}
+	    }
+	    	Etal[] trouverEtals(String produit) {
+	    	    int compteur = 0;
+	    	    for (int i = 0; i < etals.length; i++) {
+	    	        if (etals[i].contientProduit(produit)) {
+	    	            compteur++;
+	    	        }
+	    	    }
+	    	    Etal[] etalsTrouves = new Etal[compteur];
+	    	    int index = 0;
+	    	    for (int i = 0; i < etals.length; i++) {
+	    	        if (etals[i].contientProduit(produit)) {
+	    	            etalsTrouves[index] = etals[i];
+	    	            index++;
+	    	        }
+	    	    }
+
+	    	    return etalsTrouves;
+	    	}
+	    	
+	    	Etal trouverVendeur(Gaulois gaulois) {
+	    		for (int i = 0; i < etals.length; i++) {
+	    			if(etals[i].getVendeur()==gaulois) {
+	    				return etals[i];
+	    			}
+	    			return null;
+	    			
+	    				}
+	    		
+	        String afficherMarche(){
+	            int nbEtalVide = 0;
+	            String chaine="";
+
+	            for (int i = 0; i < etals.length; i++) {
+	                if (!etals[i].isEtalOccupe()) {
+	                    chaine= etals[i].afficherEtal();
+	                } else {
+	                    nbEtalVide++;
+	                }
+	            }
+
+	            if (nbEtalVide > 0) {
+	                chaine = chaine + "Il reste " + nbEtalVide + " étals non utilisés dans le marché.\n";
+	            }
+
+	            return chaine;
+	        }
+	        	
+	        	
+	        	
+	        }
+	    		
+	    	
+	    	
+	    	
+	}
+	    	
+	   
+}
+
+	    
+	    
+	    
+	    	
+	 
+	
+	
 
 	public Village(String nom, int nbVillageoisMaximum) {
 		this.nom = nom;
