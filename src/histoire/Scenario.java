@@ -42,5 +42,11 @@ public class Scenario {
 //		System.out.println(village.partirVendeur(bonemine));
 //		System.out.println(village.afficherMarche());
 	}
+	try {
+	    System.out.println(village.afficherVillageois());
+	} catch (VillageSansChefException e) {
+	    System.out.println(e.getMessage());
+	}
+
 
 }
